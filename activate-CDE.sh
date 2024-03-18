@@ -1,6 +1,15 @@
 #!/bin/sh
 
-PENTAHO_HOME=/Applications/Pentaho
+BASEDIR=$( cd "$( dirname "$0" )" && pwd )
+SET_PENTAHO_ENV="$BASEDIR/set_pentaho_env.sh"
+
+if [ -f $SET_PENTAHO_ENV ]; then
+  . $SET_PENTAHO_ENV
+else
+  echo "Error: $SET_PENTAHO_ENV not found"
+  exit 1
+fi
+
 PENTAHO_SERVER=$PENTAHO_HOME/server/pentaho-server
 PENTAHO_CDF_DD=$PENTAHO_SERVER/pentaho-solutions/system/pentaho-cdf-dd
 
@@ -11,14 +20,14 @@ if [ -d $PENTAHO_CDF_DD ]; then
   cd $PENTAHO_CDF_DD
 
   if [ -f plugin.xml -a -f $PLUGIN_XML_PATCH ]; then
-    patch -b plugin.xml $PLUGIN_XML_PATCH
+    patch -b -N plugin.xml $PLUGIN_XML_PATCH
   else
     echo "Error: plugin.xml and/or patch $PLUGIN_XML_PATCH does not exist"
     exit 2
   fi
 
   if [ -f settings.xml -a -f $SETTINGS_XML_PATCH ]; then
-    patch -b settings.xml $SETTINGS_XML_PATCH
+    patch -b -N settings.xml $SETTINGS_XML_PATCH
   else
     echo "Error: settings.xml and/or patch $SETTINGS_XML_PATCH does not exist"
     exit 2
