@@ -1,0 +1,31 @@
+--- plugin.xml.bu	2024-03-15 11:40:27
++++ plugin.xml	2024-03-15 11:41:41
+@@ -16,12 +16,10 @@
+       <description>Dashboard Designer</description>
+       <icon-url>plugin/pentaho-cdf-dd/api/resources/get?resource=/resources/wcdfFileType.png</icon-url>
+       <operations>
+-        <!--              
+         <operation>
+           <id>EDIT</id>
+           <perspective>wcdf.edit</perspective>
+         </operation>
+-        -->
+         <operation>
+           <id>RUN</id>
+         </operation>
+@@ -31,7 +29,6 @@
+       </operations>
+     </content-type>
+   </content-types>
+-  <!--
+   <overlays>
+     <overlay id="launch" resourcebundle="content/pentaho-cdf-dd/lang/messages">
+       <button id="launch_new_cde" label="${Launcher.CDE}" command="Home.openFile('${Launcher.CDE}', '${Launcher.CDE_TOOLTIP}', 'api/repos/wcdf/new');$('#btnCreateNew').popover('hide');"/>
+@@ -42,7 +39,6 @@
+       </menubar>
+     </overlay>
+   </overlays>
+-  -->
+   <external-resources>
+     <file context="requirejs">content/pentaho-cdf-dd/js/cde-require-js-cfg.js</file>
+   </external-resources>
