@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ -z "$PENTAHO_HOME" ]; then
-  PENTAHO_HOME_SEARCH_PATH=.:..:/opt/pentaho:${HOME}/pentaho:/Applications/Pentaho
+  PENTAHO_HOME_SEARCH_PATH=.:..:/opt/Pentaho:/opt/pentaho:${HOME}/pentaho:/Applications/Pentaho
   PENTAHO_START_SERVER=start-pentaho.sh
 
   for dir in `echo "$PENTAHO_HOME_SEARCH_PATH" | tr ':' '\n'`; do

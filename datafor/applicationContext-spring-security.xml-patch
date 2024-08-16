@@ -1,0 +1,19 @@
+--- applicationContext-spring-security.xml-orig	2024-07-02 10:36:00.259456588 +0200
++++ applicationContext-spring-security.xml	2024-07-02 10:46:11.813373315 +0200
+@@ -328,6 +328,7 @@
+      <property name="securityMetadataSource">
+       <!-- http://stackoverflow.com/questions/30099851/spring-security-samples-preauth-xml-example-fails-to-run#answer-30105317 -->
+       <sec:filter-security-metadata-source request-matcher="ciRegex" use-expressions="false">
++        <sec:intercept-url pattern="\A/content/datafor/.*\Z" access="Anonymous,Authenticated" />
+         <sec:intercept-url pattern="\A/osgi/cxf/hadoop-cluster/runTests.*\Z" access="Authenticated" />
+         <sec:intercept-url pattern="\A/osgi/cxf/hadoop-cluster/.*\Z" access="Administrator" />
+         <sec:intercept-url pattern="\A/content/common-ui/resources/web/(.+/)*.+\.js.*\Z" access="Anonymous,Authenticated" />
+@@ -408,6 +409,8 @@
+     <property name="securityMetadataSource">
+       <!-- http://stackoverflow.com/questions/30099851/spring-security-samples-preauth-xml-example-fails-to-run#answer-30105317 -->
+       <sec:filter-security-metadata-source request-matcher="ciRegex" use-expressions="false">
++        <sec:intercept-url pattern="\A/plugin/datafor/api/.*\Z" access="Anonymous,Authenticated" />
++        <sec:intercept-url pattern="\A/plugin/datafor-modeler/api/.*\Z" access="Anonymous,Authenticated" />
+         <sec:intercept-url pattern="\A/webservices/unifiedrepository\?wsdl.*\Z" access="Anonymous,Authenticated" />
+         <sec:intercept-url pattern="\A/webservices/userrolelistservice\?wsdl.*\Z" access="Anonymous,Authenticated" />
+         <sec:intercept-url pattern="\A/webservices/userroleservice\?wsdl.*\Z" access="Anonymous,Authenticated" />

@@ -1,0 +1,10 @@
+--- server.properties-orig	2024-07-02 10:47:21.005606549 +0200
++++ server.properties	2024-07-02 10:48:18.225799427 +0200
+@@ -1,6 +1,6 @@
+ # FullyQualifiedServerUrl is used only in the case of offline content generation
+ # and whenever something need to talk back to the server
+-fully-qualified-server-url=http://localhost:8080/pentaho/
++fully-qualified-server-url=http://pdc.pentaho.example:8080/pentaho/
+ 
+ # for example 'fr' for French, 'de' for German, da for danish
+ locale-language=

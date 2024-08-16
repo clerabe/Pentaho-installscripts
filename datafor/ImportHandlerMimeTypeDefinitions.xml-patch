@@ -1,0 +1,17 @@
+--- ImportHandlerMimeTypeDefinitions.xml-orig	2024-07-02 10:33:25.018528878 +0200
++++ ImportHandlerMimeTypeDefinitions.xml	2024-07-02 10:35:31.480340685 +0200
+@@ -90,6 +90,7 @@
+       </MimeTypeDefinition>
+       <MimeTypeDefinition mimeType="application/octet-stream" hidden="false">
+         <extension>eml</extension>
++        <extension>datafor</extension>
+       </MimeTypeDefinition>
+       <MimeTypeDefinition mimeType="application/json" hidden="false">
+         <extension>df</extension>
+@@ -180,4 +181,4 @@
+     </MimeTypeDefinitions>
+   </ImportHandler>
+ 
+-</tns:ImportHandlerMimeTypeDefinitions>
+\ No newline at end of file
++</tns:ImportHandlerMimeTypeDefinitions>
