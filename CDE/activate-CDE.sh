@@ -1,17 +1,18 @@
 #!/bin/sh
 
-BASEDIR=$( cd "$( dirname "$0" )" && pwd )
-SET_PENTAHO_ENV="$BASEDIR/set_pentaho_env.sh"
+if [ -z "$PENTAHO_HOME" ]; then
+  BASEDIR=$( cd "$( dirname "$0" )" && pwd )
+  SET_PENTAHO_ENV="$BASEDIR/../lib/set_pentaho_env.sh"
 
-if [ -f $SET_PENTAHO_ENV ]; then
-  . $SET_PENTAHO_ENV
-else
-  echo "Error: $SET_PENTAHO_ENV not found"
-  exit 1
+  if [ -f $SET_PENTAHO_ENV ]; then
+    . $SET_PENTAHO_ENV
+  else
+    echo "Error: $SET_PENTAHO_ENV not found"
+    exit 1
+  fi
 fi
 
-PENTAHO_SERVER=$PENTAHO_HOME/server/pentaho-server
-PENTAHO_CDF_DD=$PENTAHO_SERVER/pentaho-solutions/system/pentaho-cdf-dd
+PENTAHO_CDF_DD=${PENTAHO_SERVER}/pentaho-solutions/system/pentaho-cdf-dd
 
 SETTINGS_XML_PATCH=$(pwd)/settings.xml-CDE-patch
 PLUGIN_XML_PATCH=$(pwd)/plugin.xml-CDE-patch
