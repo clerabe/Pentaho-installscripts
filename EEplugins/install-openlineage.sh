@@ -16,7 +16,7 @@ fi
 echo "installing openlineage plugin"
 
 PLUGINDIR=${BASEDIR}/plugins
-OPENLINEAGE_ZIP="*openlineage*.zip"
+OPENLINEAGE_ZIP="*openlineage*0.3.0*.zip"
 
 KETTLE_PROPERTIES=~/.kettle/kettle.properties
 
@@ -45,13 +45,13 @@ install_plugin() {
       if [ -x ${instscript} ]; then
         if [ -d ${PENTAHO_SERVER} ]; then
           echo "--- installing $plugin in ${PENTAHO_SERVER} ---"
-          (yes | ${instscript} ${PENTAHO_SERVER})
+          (yes | ${instscript} -t ${PENTAHO_SERVER})
           echo "---\n"
         fi
 
         if [ -d ${PDI_HOME} ]; then
           echo "--- installing $plugin in ${PDI_HOME} ---"
-          (yes | ${instscript} ${PDI_HOME})
+          (yes | ${instscript} -t ${PDI_HOME})
           echo "---\n"
         fi
       else

@@ -2,3 +2,4 @@ datafor/*.zip
 EEplugins/plugins/*
 EA/plugins/*
 EA/*.zip
+.DS_Store
