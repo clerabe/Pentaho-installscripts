@@ -7,7 +7,10 @@ CDEDIR=$BASEDIR/CDE
 CDEINST=$CDEDIR/activate-CDE.sh
 
 EEPLUGDIR=$BASEDIR/EEplugins
-EEPLUGINST=$EEPLUGDIR/install-EEplugins.sh
+EEPLUGINST=$EEPLUGDIR/install.sh
+
+EADIR=$BASEDIR/EA
+EAINST=$EADIR/install-EA.sh
 
 if [ -f $SET_PENTAHO_ENV ]; then
   . $SET_PENTAHO_ENV
@@ -21,17 +24,24 @@ PENTAHO_SYSTEM=$PENTAHO_SERVER/pentaho-solutions/system
 
 # activate Community Dashboard Editor (CDE)
 
-if [ -f $CDEINST ]; then
+if [ -x $CDEINST ]; then
   (cd $CDEDIR; $CDEINST )
 else
-  echo "Warning: Community Dashboard Editor (CDE) not activated"
+  warning "Community Dashboard Editor (CDE) not activated"
 fi
 
 # install EE plugins
 
-if [ -f $EEPLUGINST ]; then
+if [ -x $EEPLUGINST ]; then
   (cd $EEPLUGDIR; $EEPLUGINST )
 else
-  echo "Warning: Enterprise Edition Plugins not installed"
+  warning "Enterprise Edition Plugins not installed"
 fi
 
+# install Early Access features
+
+if [ -x $EAINST ]; then
+  (cd $EADIR; $EAINST )
+else
+  warning "Early Access features not installed"
+fi

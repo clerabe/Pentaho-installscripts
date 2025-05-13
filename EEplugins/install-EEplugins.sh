@@ -27,29 +27,35 @@ install_plugin() {
   if [ -d ${WD} ]; then
     cd ${WD}
 
-    plugzip=$(ls *${EEINSTSUFFIX})
-    plugin=$(basename ${plugzip} ${EEINSTSUFFIX})
-    plugininst=${plugin}/installer.jar
+    unzip -q $(ls *${EEINSTSUFFIX})
 
-    unzip -q ${plugzip}
+    plugin=$(find * -type d | head -1)
 
-    if [ -f ${plugininst} ]; then
-      if [ -d ${INSTALL_SERVERDIR} ]; then
-        echo "\n--- installing $plugin in ${INSTALL_SERVERDIR} ---"
-        java -DINSTALL_PATH=${INSTALL_SERVERDIR} -DEULA_ACCEPT=true -jar ${plugininst} -options-system
-        echo "---"
-      fi
+    if [ -d "${plugin}" ]; then
+      cd ${plugin}
+      
+      instjar=./installer.jar
 
-      if [ -d ${INSTALL_PDIDIR} ]; then
-        echo "\n--- installing $plugin in ${INSTALL_PDIDIR} ---"
-        java -DINSTALL_PATH=${INSTALL_PDIDIR} -DEULA_ACCEPT=true -jar ${plugininst} -options-system
-        echo "---"
+      if [ -f ${instjar} ]; then
+        if [ -d ${INSTALL_SERVERDIR} ]; then
+          echo "--- installing $plugin in ${INSTALL_SERVERDIR} ---"
+          java -DINSTALL_PATH=${INSTALL_SERVERDIR} -DEULA_ACCEPT=true -jar ${instjar} -options-system
+          echo "---\n"
+        fi
+
+        if [ -d ${INSTALL_PDIDIR} ]; then
+          echo "--- installing $plugin in ${INSTALL_PDIDIR} ---"
+          java -DINSTALL_PATH=${INSTALL_PDIDIR} -DEULA_ACCEPT=true -jar ${instjar} -options-system
+          echo "---\n"
+        fi
+      else
+        warning "no installer (${instjar}) found; skipping installation\n$"
       fi
     else
-      echo "WARNING: installer ${plugininst} not found; skipping installation"
+      warning "no installer directory ${plugininst} found; skipping installation\n"
     fi
   else
-    echo "Error: workdir $WDs does not exist"
+    error "workdir $WDs does not exist"
     exit 1
   fi
 }
@@ -67,5 +73,5 @@ if [ -d ${PLUGINDIR} ]; then
     rm -rf ${WORKDIR}
   done
 else
-  echo "Plugin directory (${PLUGINDIR}) not found"
+  error "Plugin directory (${PLUGINDIR}) not found"
 fi

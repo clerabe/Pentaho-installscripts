@@ -15,7 +15,7 @@ if [ -z "$PENTAHO_HOME" ]; then
       if [ -x "${PENTAHO_STARTER}" ]; then
         echo "Using ${PENTAHO_HOME} as PENTAHO_HOME base directory"
 
-        PENTAHO_SERVER=$PENTAHO_HOME/server/pentaho-server
+        PENTAHO_SERVER=$(dirname ${PENTAHO_STARTER})
         PENTAHO_SYSTEM=$PENTAHO_SERVER/pentaho-solutions/system
 
         if [ -x "${PDI_STARTER}" ]; then
@@ -40,3 +40,21 @@ if [ -z "$PENTAHO_HOME" ]; then
 else
   export PENTAHO_HOME PENTAHO_SERVER PENTAHO_SYSTEM PDI_HOME
 fi
+
+red='\033[0;31m'
+yellow='\033[0;33m'
+nc='\033[0m'
+
+error() {
+  ERRMSG=$1
+  ERRCODE=$2
+
+  echo "${red}Error: ${ERRMSG}${nc}"
+  exit $ERRCODE
+}
+
+warning() {
+  WARNMSG=$1
+
+  echo "${yellow}WARNING: ${WARNMSG}${nc}"
+}
